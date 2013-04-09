@@ -9,8 +9,24 @@ keywords = []
 # Picking up keywords for localization
 keyword_src_path = Dir::getwd + "/keywords/src"
 Find.find(keyword_src_path) do |path|
-puts path
-puts File.directory?(path)
+#    puts path
+#  unless !File.directory?(path)
+#      puts "unless"
+#  end
+#  if File.directory?(path)
+#      puts "if"
+#  end
+  if path[path.length-"list".length, "list".length] === "list" then
+    text_fetch_flag = false
+    text_en = ""
+    text_jp = ""
+    source_file = IO.readlines path
+    source_file.each do |data|
+	data = data.chomp
+        text_en = data.gsub(/([\'\?"\(\)\*\[\]])/, "\\\\\\1")
+	puts data,text_en
+    end
+  end
 end
 #Find.find(keyword_src_path) do |path|
 #  next unless !File.directory?(path)
